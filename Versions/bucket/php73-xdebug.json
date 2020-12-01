@@ -1,0 +1,51 @@
+{
+    "homepage": "https://xdebug.org/",
+    "license": {
+        "identifier": "Xdebug-1.01",
+        "url": "https://xdebug.org/license.php"
+    },
+    "version": "3.0.0-7.3",
+    "architecture": {
+        "64bit": {
+            "url": "https://xdebug.org/files/php_xdebug-3.0.0-7.3-vc15-x86_64.dll#/php_xdebug.dll",
+            "hash": "eb7b0c2421c125b274a9226845fb32c4d9d534d4d36ba3a8f40dd117aaf9c2f1"
+        },
+        "32bit": {
+            "url": "https://xdebug.org/files/php_xdebug-3.0.0-7.3-vc15.dll#/php_xdebug.dll",
+            "hash": "364ccdd01afde77b9a4df4a799f3d5b9da073653f471b5afe3abd1c0b4fd8a36"
+        }
+    },
+    "post_install": [
+        "$phpconfd = \"$persist_dir\\..\\php73\\cli\\conf.d\"",
+        "$ini = \"zend_extension=$dir\\php_xdebug.dll`n[xdebug]`nxdebug.remote_enable=on`nxdebug.remote_autostart=on`nxdebug.remote_connect_back=on\"",
+        "if(!(test-path $phpconfd\\xdebug.ini)) {",
+        "    Write-Output \"Enabling extension $(Convert-Path $phpconfd)\\xdebug.ini\"",
+        "    Add-Content -Value $ini -Path \"$phpconfd\\xdebug.ini\"",
+        "} else {",
+        "    Write-Host -f Yellow \"PHP 7.3 was not installed through scoop, you have to activate php_xdebug.dll manually! Add the following:`n\"",
+        "    Write-Host -f Cyan \"$ini`n`n\"",
+        "}"
+    ],
+    "notes": [
+        "Xdebug is already enabled if PHP 7.3 was installed through scoop!",
+        "Otherwise add '$dir\\php_xdebug.dll' to your php.ini"
+    ],
+    "checkver": {
+        "url": "https://xdebug.org/download/historical",
+        "re": "php_xdebug-([\\d.]+-7.3)-vc15-x86_64.dll"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://xdebug.org/files/php_xdebug-$version-vc15-x86_64.dll#/php_xdebug.dll"
+            },
+            "32bit": {
+                "url": "https://xdebug.org/files/php_xdebug-$version-vc15.dll#/php_xdebug.dll"
+            }
+        },
+        "hash": {
+            "url": "https://xdebug.org/download/historical",
+            "regex": "([a-fA-F0-9]{64}).+?$basename"
+        }
+    }
+}

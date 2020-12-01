@@ -1,0 +1,33 @@
+{
+    "version": "20.11.28",
+    "description": "Video editor",
+    "homepage": "https://www.shotcut.org",
+    "license": "GPL-3.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/mltframework/shotcut/releases/download/v20.11.28/shotcut-win64-201128.zip",
+            "hash": "45cde8000364a9803776435918d7257aaf66fb5a848ee8d98ba55c395893ed9f"
+        }
+    },
+    "extract_dir": "Shotcut",
+    "bin": "shotcut.exe",
+    "shortcuts": [
+        [
+            "shotcut.exe",
+            "Shotcut"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/mltframework/shotcut"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/mltframework/shotcut/releases/download/v$version/shotcut-win64-$cleanVersion.zip"
+            }
+        },
+        "hash": {
+            "url": "$baseurl/sha256sums.txt"
+        }
+    }
+}

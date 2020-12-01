@@ -1,0 +1,28 @@
+{
+    "version": "4.0.5",
+    "description": "A Bitcoin SPV Wallet",
+    "homepage": "https://electrum.org",
+    "license": "MIT",
+    "url": "https://download.electrum.org/4.0.5/electrum-4.0.5-portable.exe#/electrum.exe",
+    "hash": "52daef382df9b0cbecf7c328765669a2dfff8ee522dc06d07a1977737969aadb",
+    "pre_install": [
+        "if (!(Test-Path \"$persist_dir\\electrum_data\\config\")) {",
+        "   ensure \"$dir\\electrum_data\" | Out-Null",
+        "   Set-Content \"$dir\\electrum_data\\config\" '{ \"check_updates\": false }' -Encoding Ascii",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "electrum.exe",
+            "Electrum"
+        ]
+    ],
+    "persist": "electrum_data",
+    "checkver": {
+        "url": "https://raw.githubusercontent.com/spesmilo/electrum-web/master/panel-download.html",
+        "regex": "Latest release: Electrum-([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://download.electrum.org/$version/electrum-$version-portable.exe#/electrum.exe"
+    }
+}

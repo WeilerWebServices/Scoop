@@ -1,0 +1,39 @@
+{
+    "version": "1.5.10",
+    "description": "Multi-platform transparent client-side encryption of files in the cloud",
+    "homepage": "https://cryptomator.org",
+    "license": "GPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/cryptomator/cryptomator/releases/download/1.5.10/Cryptomator-1.5.10-x64.exe",
+            "hash": "f2a60247812660f23e8ea891e24ea5fbb6661c262b248ed1a27d946431ca33ce"
+        }
+    },
+    "innosetup": true,
+    "post_install": [
+        "# change appdata settings folder",
+        "(Get-Content \"$dir\\app\\Cryptomator.cfg\" -Encoding ASCII).replace('~/AppData/Roaming/Cryptomator', './data') | Set-Content \"$dir\\app\\Cryptomator.cfg\" -Encoding ASCII"
+    ],
+    "bin": "Cryptomator.exe",
+    "shortcuts": [
+        [
+            "Cryptomator.exe",
+            "Cryptomator"
+        ]
+    ],
+    "persist": "data",
+    "checkver": {
+        "url": "https://github.com/cryptomator/cryptomator/releases",
+        "regex": "Cryptomator-([\\d.]+)-x64\\.exe"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/cryptomator/cryptomator/releases/download/$version/Cryptomator-$version-x64.exe"
+            }
+        },
+        "hash": {
+            "url": "https://dl.bintray.com/cryptomator/cryptomator/$version/Cryptomator-$version-x64.exe.sha256"
+        }
+    }
+}

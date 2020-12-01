@@ -1,0 +1,33 @@
+{
+    "description": "Alibaba Dragonwell, a downstream version of OpenJDK, is the in-house OpenJDK implementation at Alibaba",
+    "version": "8.4.4-262",
+    "homepage": "https://www.aliyun.com/product/dragonwell",
+    "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/alibaba/dragonwell8/releases/download/dragonwell-8.4.4_jdk8u262-ga/Alibaba_Dragonwell_8.4.4-Experimental_Windows_x64.tar.gz",
+            "hash": "95dda782c04a0b5b80f7fc8ed3d5ac06a1c1e8c8054332d0f00e7a255ae505f5"
+        }
+    },
+    "extract_dir": "j2sdk-image",
+    "env_add_path": "bin",
+    "env_set": {
+        "JAVA_HOME": "$dir"
+    },
+    "checkver": {
+        "github": "https://github.com/alibaba/dragonwell8",
+        "regex": "(?<tag>dragonwell-(?<dragon>[\\d.]+)_jdk8u(?<jdk>[\\d]+)(?:(?<b>-[\\d+])|-ga))",
+        "replace": "${dragon}-${jdk}${b}"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/alibaba/dragonwell8/releases/download/$matchTag/Alibaba_Dragonwell_$matchDragon-Experimental_Windows_x64.tar.gz"
+            }
+        },
+        "hash": {
+            "url": "https://github.com/alibaba/dragonwell8/releases/tag/$matchTag",
+            "find": "$sha256\\s+$basename"
+        }
+    }
+}

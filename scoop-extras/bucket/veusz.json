@@ -1,0 +1,31 @@
+{
+    "version": "3.3",
+    "description": "Scientific plotting and graphing program, designed to produce publication-ready 2D and 3D plots.",
+    "homepage": "https://veusz.github.io",
+    "license": "GPL-2.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/veusz/veusz/releases/download/veusz-3.3/veusz-3.3-x64-windows-setup.exe#/dl.7z",
+            "hash": "b4e307edbbea473202b8327018e39b0b8db2330e26d05dfc2f83888224db7e40"
+        }
+    },
+    "pre_install": "Remove-Item \"$dir\\`$*\" \"$dir\\uninst*\" -Force -Recurse",
+    "bin": "veusz.exe",
+    "shortcuts": [
+        [
+            "veusz.exe",
+            "Veusz"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/veusz/veusz",
+        "regex": "tree/veusz-([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/veusz/veusz/releases/download/veusz-$version/veusz-$version-x64-windows-setup.exe#/dl.7z"
+            }
+        }
+    }
+}

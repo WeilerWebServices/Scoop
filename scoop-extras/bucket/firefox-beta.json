@@ -1,0 +1,52 @@
+{
+    "version": "84.0b6",
+    "description": "Beta builds of Firefox: the popular open source web browser.",
+    "homepage": "https://www.mozilla.org/en-US/firefox/beta/",
+    "license": "MPL-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://archive.mozilla.org/pub/firefox/releases/84.0b6/win64/en-US/Firefox%20Setup%2084.0b6.exe#/dl.7z",
+            "hash": "sha512:226c31a592f5e3aeb97cb9db402f7c35217f025ec931c786c4a0148ab1f522eac8aa8287faae441a383b58523bfbb2070089f1495cb4685efeb9afbb41078549"
+        },
+        "32bit": {
+            "url": "https://archive.mozilla.org/pub/firefox/releases/84.0b6/win32/en-US/Firefox%20Setup%2084.0b6.exe#/dl.7z",
+            "hash": "sha512:e037eef9ec4a809b81aaf3ce6ed92135176953a3ae0703cbefe51a5721703d1baff5e8f8d26879efc45a8eba4359032635ea3173d355b770687b5d83fe8eac5b"
+        }
+    },
+    "extract_dir": "core",
+    "bin": [
+        [
+            "firefox.exe",
+            "firefox-beta"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "firefox.exe",
+            "Firefox Beta"
+        ]
+    ],
+    "checkver": {
+        "url": "https://aus5.mozilla.org/update/6/Firefox/60.0/_/WINNT_x86_64-msvc-x64/en-US/beta/_/_/_/_/update.xml",
+        "xpath": "/updates/update/patch/@URL",
+        "regex": "firefox-([\\db.]+)-"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://archive.mozilla.org/pub/firefox/releases/$version/win64/en-US/Firefox%20Setup%20$version.exe#/dl.7z",
+                "hash": {
+                    "url": "https://archive.mozilla.org/pub/firefox/releases/$version/SHA512SUMS",
+                    "regex": "$sha512\\s+win64/en-US/$basename"
+                }
+            },
+            "32bit": {
+                "url": "https://archive.mozilla.org/pub/firefox/releases/$version/win32/en-US/Firefox%20Setup%20$version.exe#/dl.7z",
+                "hash": {
+                    "url": "https://archive.mozilla.org/pub/firefox/releases/$version/SHA512SUMS",
+                    "regex": "$sha512\\s+win32/en-US/$basename"
+                }
+            }
+        }
+    }
+}

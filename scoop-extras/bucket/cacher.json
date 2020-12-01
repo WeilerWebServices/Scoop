@@ -1,0 +1,31 @@
+{
+    "version": "2.34.0",
+    "description": "Code snippet organizer for pro developers",
+    "homepage": "https://www.cacher.io/",
+    "license": "Shareware",
+    "architecture": {
+        "64bit": {
+            "url": "https://s3.amazonaws.com/download.cacher.io/Cacher%20Setup%202.34.0.exe#/dl.7z",
+            "hash": "sha512:661fdde591aa00cd439b6941a6dea6292ba0248412ef846891ebb2cc85fe603bc6f49e0f6454b4edabc4dc286eb2d229029870e3d20711603bf6925c1cf1dc70",
+            "pre_install": "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\""
+        }
+    },
+    "post_install": "Remove-Item \"$dir\\`$*\" -Recurse",
+    "shortcuts": [
+        [
+            "Cacher.exe",
+            "Cacher"
+        ]
+    ],
+    "checkver": {
+        "url": "https://s3.amazonaws.com/download.cacher.io/latest.yml",
+        "regex": "version:\\s([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://s3.amazonaws.com/download.cacher.io/Cacher%20Setup%20$version.exe#/dl.7z",
+        "hash": {
+            "url": "$baseurl/latest.yml",
+            "regex": "sha512:\\s+$base64"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+# appveyor.yml
+
+# Building, testing and deployment for Windows
+
+# Syntax for this file:
+# https://www.appveyor.com/docs/appveyor-yml
+
+build: false
+
+environment:
+  matrix:
+    # - PYTHON: "C:\\Python27"
+    # Let's ease the hits on GitHub's API:
+    # - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python38"
+    # - PYTHON: "C:\\Python37-x64"
+
+matrix:
+  fast_finish: false
+
+init:
+  - "python -V"
+
+install:
+  - "python -m pip install -r maintenance/requirements.txt"
+
+test_script:
+  - "python maintenance/github-crawler.py"

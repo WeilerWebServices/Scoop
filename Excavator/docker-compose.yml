@@ -1,0 +1,116 @@
+version: "3.6"
+
+services:
+  main:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - main-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES: "curl,openssl,brotli"
+      BUCKET: "ScoopInstaller/Main"
+      CRONTAB: "0 * * * *"
+      SCOOP_DEBUG: "true"
+  extras:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - extras-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES:
+      BUCKET: "lukesampson/scoop-extras"
+      CRONTAB: "0 * * * *"
+      SCOOP_DEBUG: "true"
+  versions:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - versions-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES:
+      BUCKET: "ScoopInstaller/Versions"
+      CRONTAB: "0 0 * * *"
+      SCOOP_DEBUG: "true"
+  php:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - php-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES:
+      BUCKET: "ScoopInstaller/PHP"
+      CRONTAB: "0 0 * * *"
+      SCOOP_DEBUG: "true"
+  games:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - games-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES:
+      BUCKET: "Calinou/scoop-games"
+      CRONTAB: "0 0 * * *"
+      SCOOP_DEBUG: "true"
+  java:
+    image: r15ch13/excavator:latest
+    deploy:
+      mode: global
+    volumes:
+      - ssh:/root/.ssh
+      - java-logs:/root/log
+    environment:
+      GIT_USERNAME: "Richard Kuhnt"
+      GIT_EMAIL: "r15ch13+git@gmail.com"
+      SNOWFLAKES:
+      BUCKET: "ScoopInstaller/Java"
+      CRONTAB: "0 0 * * *"
+      SCOOP_DEBUG: "true"
+  caddy:
+    image: abiosoft/caddy:no-stats
+    deploy:
+      mode: global
+    ports:
+      - "30015:2015"
+    configs:
+      - source: caddyfile
+        target: /etc/Caddyfile
+    volumes:
+      - main-logs:/srv/logs/main
+      - extras-logs:/srv/logs/extras
+      - versions-logs:/srv/logs/versions
+      - php-logs:/srv/logs/php
+      - games-logs:/srv/logs/games
+      - java-logs:/srv/logs/java
+    environment:
+      ACME_AGREE: "true"
+configs:
+  caddyfile:
+    external: true
+volumes:
+  ssh:
+  main-logs:
+  extras-logs:
+  versions-logs:
+  php-logs:
+  games-logs:
+  java-logs:

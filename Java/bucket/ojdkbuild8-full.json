@@ -1,0 +1,39 @@
+{
+    "description": "OpenJDK 8 binaries built using source code from the CentOS project",
+    "homepage": "https://github.com/ojdkbuild/ojdkbuild",
+    "version": "1.8.0.275-1.b01",
+    "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/ojdkbuild/ojdkbuild/releases/download/java-1.8.0-openjdk-1.8.0.275-1.b01/java-1.8.0-openjdk-1.8.0.275-1.b01.ojdkbuild.windows.x86_64.msi",
+            "hash": "9b7b8538b6c8d4c8fdbe44cf1f0b135c3d2a389507c0f6d58b2d78be60d6badb"
+        },
+        "32bit": {
+            "url": "https://github.com/ojdkbuild/ojdkbuild/releases/download/java-1.8.0-openjdk-1.8.0.275-1.b01-x86/java-1.8.0-openjdk-1.8.0.275-1.b01.ojdkbuild.windows.x86.msi",
+            "hash": "2e716e63e47219664b6dc92bd40010e0d693eebcd02c90e6333d22e22c61e64e"
+        }
+    },
+    "extract_dir": "ojdkbuild\\java-1.8.0-openjdk-1.8.0.275-1",
+    "env_add_path": "bin",
+    "env_set": {
+        "JAVA_HOME": "$dir"
+    },
+    "checkver": {
+        "url": "https://raw.githubusercontent.com/ojdkbuild/ojdkbuild/master/README.md",
+        "re": "download/(?<folder>(?:java-1.8.0-openjdk-)?(?<version>(?<short>1.8.0[\\d.]+)-(?<build>[\\d]+)(?:[\\db.]*)))(?<x>-x86)?/(?<url>java-(?<major>[\\d.]+)-openjdk-([\\db.-]+)(.ojdkbuild|.windows){2}).x86.msi"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/ojdkbuild/ojdkbuild/releases/download/$matchFolder/$matchUrl.x86_64.msi"
+            },
+            "32bit": {
+                "url": "https://github.com/ojdkbuild/ojdkbuild/releases/download/$matchFolder$matchX/$matchUrl.x86.msi"
+            }
+        },
+        "hash": {
+            "url": "$url.sha256"
+        },
+        "extract_dir": "ojdkbuild\\java-$matchMajor-openjdk-$matchShort-$matchBuild"
+    }
+}

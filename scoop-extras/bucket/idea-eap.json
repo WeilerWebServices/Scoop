@@ -1,0 +1,38 @@
+{
+    "version": "203.5981.41",
+    "description": "Early Access Program for IntelliJ IDEA Community Edition",
+    "homepage": "https://www.jetbrains.com/idea/",
+    "license": "Apache-2.0",
+    "url": "https://download.jetbrains.com/idea/ideaIC-203.5981.41.win.zip",
+    "hash": "4aa7c234dca7348aa620e7c88bf5b82c1767a12dafcb693b5be5db8e6e35cc86",
+    "architecture": {
+        "64bit": {
+            "bin": "bin\\idea64.exe",
+            "shortcuts": [
+                [
+                    "bin\\idea64.exe",
+                    "IntelliJ IDEA Community Edition EAP"
+                ]
+            ]
+        },
+        "32bit": {
+            "bin": "bin\\idea.exe",
+            "shortcuts": [
+                [
+                    "bin\\idea.exe",
+                    "IntelliJ IDEA Community Edition EAP"
+                ]
+            ]
+        }
+    },
+    "checkver": {
+        "url": "https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=eap",
+        "jsonpath": "$..build"
+    },
+    "autoupdate": {
+        "url": "https://download.jetbrains.com/idea/ideaIC-$version.win.zip",
+        "hash": {
+            "url": "$url.sha256"
+        }
+    }
+}

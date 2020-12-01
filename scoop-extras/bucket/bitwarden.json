@@ -1,0 +1,44 @@
+{
+    "version": "1.23.0",
+    "description": "Password management solutions for individuals, teams, and business organizations",
+    "homepage": "https://bitwarden.com",
+    "license": "GPL-3.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/bitwarden/desktop/releases/download/v1.23.0/bitwarden-1.23.0-x64.nsis.7z",
+            "hash": "sha512:1ca463e6cc18cd501881d19758fe8db98343d4da7fa7f66c9a05b179093ada770b77d7b1770d8fd403bdb8518834932fc85f4cac0d6723b4d0334823a4c6fb9f"
+        },
+        "32bit": {
+            "url": "https://github.com/bitwarden/desktop/releases/download/v1.23.0/bitwarden-1.23.0-ia32.nsis.7z",
+            "hash": "sha512:e1e83a0116e7ba5a501665ce00dad4198ddef1943899cc086a84dba0c8126092f9e8f29cf00a38a0750a07fece025814be4bc8c9a77a59bbb323ed32b694fffe"
+        }
+    },
+    "bin": "Bitwarden.exe",
+    "shortcuts": [
+        [
+            "Bitwarden.exe",
+            "Bitwarden"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/bitwarden/desktop"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/bitwarden/desktop/releases/download/v$version/bitwarden-$version-x64.nsis.7z",
+                "hash": {
+                    "url": "$baseurl/latest.yml",
+                    "regex": "(?sm)x64.*?$base64"
+                }
+            },
+            "32bit": {
+                "url": "https://github.com/bitwarden/desktop/releases/download/v$version/bitwarden-$version-ia32.nsis.7z",
+                "hash": {
+                    "url": "$baseurl/latest.yml",
+                    "regex": "(?sm)ia32.*?$base64"
+                }
+            }
+        }
+    }
+}

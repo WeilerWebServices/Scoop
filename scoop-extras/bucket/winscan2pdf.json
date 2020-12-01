@@ -1,0 +1,36 @@
+{
+    "version": "6.22",
+    "description": "Documents to PDF scanner",
+    "homepage": "https://www.softwareok.com/?seite=Microsoft/WinScan2PDF",
+    "license": {
+        "identifier": "Freeware",
+        "url": "https://www.softwareok.com/?seite=Microsoft/WinScan2PDF/Eula"
+    },
+    "url": "https://www.softwareok.com/Download/WinScan2PDF_Portable.zip",
+    "hash": "b6e507f92d605ca499e9842d9e0e3d2fd4c220d7324e9b8dd112580004bd60d2",
+    "pre_install": "if (-not (Test-Path \"$persist_dir\\WinScan2PDF_p.ini\")) { New-Item \"$dir\\WinScan2PDF_p.ini\" | Out-Null }",
+    "bin": [
+        [
+            "WinScan2PDF_p.exe",
+            "WinScan2PDF"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "WinScan2PDF_p.exe",
+            "WinScan2PDF"
+        ]
+    ],
+    "persist": "WinScan2PDF_p.ini",
+    "checkver": {
+        "url": "https://www.softwareok.com/?seite=Microsoft/WinScan2PDF/History",
+        "regex": "version ([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.softwareok.com/Download/WinScan2PDF_Portable.zip",
+        "hash": {
+            "url": "https://www.softwareok.com/?Download=WinScan2PDF",
+            "regex": "$basename.*?$sha256<"
+        }
+    }
+}

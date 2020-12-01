@@ -1,0 +1,41 @@
+{
+    "version": "203.5981.41",
+    "description": "Early Access Program for IntelliJ IDEA Ultimate Edition",
+    "homepage": "https://www.jetbrains.com/idea/",
+    "license": {
+        "identifier": "Shareware",
+        "url": "https://www.jetbrains.com/legal/agreements/user_eap.html"
+    },
+    "url": "https://download.jetbrains.com/idea/ideaIU-203.5981.41.win.zip",
+    "hash": "fb10160700b7254dc90da903d3b3365058ff0f094ae1ffe9b5c8f1a179ddc542",
+    "architecture": {
+        "64bit": {
+            "bin": "bin\\idea64.exe",
+            "shortcuts": [
+                [
+                    "bin\\idea64.exe",
+                    "IntelliJ IDEA Ultimate EAP"
+                ]
+            ]
+        },
+        "32bit": {
+            "bin": "bin\\idea.exe",
+            "shortcuts": [
+                [
+                    "bin\\idea.exe",
+                    "IntelliJ IDEA Ultimate EAP"
+                ]
+            ]
+        }
+    },
+    "checkver": {
+        "url": "https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=eap",
+        "jsonpath": "$..build"
+    },
+    "autoupdate": {
+        "url": "https://download.jetbrains.com/idea/ideaIU-$version.win.zip",
+        "hash": {
+            "url": "$url.sha256"
+        }
+    }
+}
